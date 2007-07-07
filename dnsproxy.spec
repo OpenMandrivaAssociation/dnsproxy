@@ -1,15 +1,16 @@
 Summary:	The dnsproxy daemon is a proxy for DNS queries
 Name:		dnsproxy
 Version:	1.15
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	BSD-style
 Group:		System/Servers
 URL:		http://www.wolfermann.org/dnsproxy.html
 Source0:	http://www.wolfermann.org/%{name}-%{version}.tar.bz2
-Source1:	dnsproxy.init.bz2
+Source1:	dnsproxy.init
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
 BuildRequires:	libevent-devel
+BuildRequires:	groff-for-man
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -34,7 +35,7 @@ firewalls, or...
 
 %setup -q
 
-bzcat %{SOURCE1} > dnsproxy.init
+cp %{SOURCE1} dnsproxy.init
 
 %build
 
@@ -71,4 +72,3 @@ install -m0755 dnsproxy.init %{buildroot}%{_initrddir}/dnsproxy
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/dnsproxy.conf
 %attr(0755,root,root) %{_sbindir}/dnsproxy
 %{_mandir}/man1/*
-
