@@ -11,7 +11,6 @@ Requires(post): rpm-helper
 Requires(preun): rpm-helper
 BuildRequires:	libevent-devel
 BuildRequires:	groff-for-man
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 The dnsproxy daemon is a proxy for DNS queries. It forwards these
