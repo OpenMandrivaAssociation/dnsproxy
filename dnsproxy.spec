@@ -1,4 +1,4 @@
-Summary:	The dnsproxy daemon is a proxy for DNS queries
+Summary:	Proxy for DNS queries
 Name:		dnsproxy
 Version:	1.15
 Release:	%mkrel 3
