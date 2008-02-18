@@ -1,7 +1,7 @@
 Summary:	Proxy for DNS queries
 Name:		dnsproxy
 Version:	1.15
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	BSD-style
 Group:		System/Servers
 URL:		http://www.wolfermann.org/dnsproxy.html
