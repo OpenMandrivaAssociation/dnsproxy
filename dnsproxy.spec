@@ -1,7 +1,7 @@
 Summary:	Proxy for DNS queries
 Name:		dnsproxy
 Version:	1.15
-Release:	%mkrel 4
+Release:	%mkrel 5
 License:	BSD-style
 Group:		System/Servers
 URL:		http://www.wolfermann.org/dnsproxy.html
@@ -45,7 +45,7 @@ cp %{SOURCE1} dnsproxy.init
 %make
 
 %install
-[ -n "%{buildroot}" -a "%{buildroot}" != / ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 install -d %{buildroot}%{_initrddir}
 install -d %{buildroot}%{_sbindir}
@@ -63,7 +63,7 @@ install -m0755 dnsproxy.init %{buildroot}%{_initrddir}/dnsproxy
 %_preun_service dnsproxy
 
 %clean
-[ -n "%{buildroot}" -a "%{buildroot}" != / ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
