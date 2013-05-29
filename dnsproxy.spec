@@ -1,7 +1,7 @@
 Summary:	Proxy for DNS queries
 Name:		dnsproxy
 Version:	1.16
-Release:	3
+Release:	4
 License:	BSD-style
 Group:		System/Servers
 Url:		http://www.wolfermann.org/dnsproxy.html
