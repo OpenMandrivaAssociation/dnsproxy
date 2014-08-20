@@ -1,15 +1,20 @@
 Summary:	Proxy for DNS queries
 Name:		dnsproxy
 Version:	1.16
-Release:	4
+Release:	5
 License:	BSD-style
 Group:		System/Servers
-Url:		http://www.wolfermann.org/dnsproxy.html
+URL:		http://www.wolfermann.org/dnsproxy.html
 Source0:	http://www.wolfermann.org/%{name}-%{version}.tar.bz2
-Source1:	dnsproxy.init
-BuildRequires:	groff-base
-BuildRequires:	pkgconfig(libevent)
-Requires(post,preun):	rpm-helper
+Source1:	dnsproxy.service
+Requires(post): rpm-helper
+Requires(preun): rpm-helper
+BuildRequires:	libevent-devel
+BuildRequires:	groff-for-man
+BuildRequires: systemd
+Requires(post): systemd
+Requires(preun): systemd
+Requires(postun): systemd
 
 %description
 The dnsproxy daemon is a proxy for DNS queries. It forwards these
@@ -31,34 +36,36 @@ firewalls, or...
 
 %prep
 %setup -q
-cp %{SOURCE1} dnsproxy.init
 
 %build
 %configure2_5x \
-	--with-native-libevent
-
+    --with-native-libevent
 %make
 
 %install
-install -d %{buildroot}%{_initrddir}
+install -d %{buildroot}%{_unitdir}
 install -d %{buildroot}%{_sbindir}
 install -d %{buildroot}%{_mandir}/man1
 
 install -m0755 dnsproxy %{buildroot}%{_sbindir}/
 install -m0644 dnsproxy.1 %{buildroot}%{_mandir}/man1
-install -m0644 dnsproxy.conf %{buildroot}%{_sysconfdir}/dnsproxy.conf
-install -m0755 dnsproxy.init %{buildroot}%{_initrddir}/dnsproxy
+install -D -p -m 0644 dnsproxy.conf %{buildroot}%{_sysconfdir}/dnsproxy.conf
+install -D -p -m 0755 %{SOURCE1} %{buildroot}%{_unitdir}/dnsproxy.service
 
 %post
-%_post_service dnsproxy
+%systemd_post dnsproxy.service
 
 %preun
-%_preun_service dnsproxy
+%systemd_preun dnsproxy.service
+
+%postun
+%systemd_postun_with_restart dnsproxy.service
+
+%clean
 
 %files
 %doc README
-%{_initrddir}/dnsproxy
-%config(noreplace) %{_sysconfdir}/dnsproxy.conf
-%{_sbindir}/dnsproxy
+%{_unitdir}/dnsproxy.service
+%attr(0644,root,root) %config(noreplace) %{_sysconfdir}/dnsproxy.conf
+%attr(0755,root,root) %{_sbindir}/dnsproxy
 %{_mandir}/man1/*
-

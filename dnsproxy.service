@@ -1,0 +1,18 @@
+[Unit]
+Description=This shell script takes care of starting and stopping dnsproxy
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/echo -n "Starting dnsproxy: "
+ExecStart=/usr/sbin/dnsproxy -c /etc/dnsproxy.conf -d
+ExecStart=/bin/echo
+ExecStart=/bin/touch /var/lock/subsys/dnsproxy
+
+ExecStop=/bin/echo -n "Stopping dnsproxy: "
+ExecStop=/bin/killall dnsproxy
+ExecStop=/bin/echo
+ExecStop=/bin/rm -f /var/lock/subsys/dnsproxy
+
+[Install]
+WantedBy=multi-user.target
