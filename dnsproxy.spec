@@ -1,15 +1,15 @@
 Summary:	Proxy for DNS queries
 Name:		dnsproxy
-Version:	1.16
-Release:	6
+Version:	1.17
+Release:	1
 License:	BSD-style
 Group:		System/Servers
 URL:		http://www.wolfermann.org/dnsproxy.html
-Source0:	http://www.wolfermann.org/%{name}-%{version}.tar.bz2
+Source0:	http://www.wolfermann.org/%{name}-%{version}.tar.gz
 Source1:	dnsproxy.service
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
-BuildRequires:	libevent-devel
+BuildRequires:	pkgconfig(libevent)
 BuildRequires:	groff-for-man
 BuildRequires: systemd
 Requires(post): systemd
