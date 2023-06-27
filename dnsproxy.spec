@@ -1,3 +1,5 @@
+%global optflags %{optflags} -Wno-error -Wno-implicit-function-declaration
+
 Summary:	Proxy for DNS queries
 Name:		dnsproxy
 Version:	1.17
