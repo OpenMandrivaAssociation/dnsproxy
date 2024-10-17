@@ -6,7 +6,7 @@ Version:	1.17
 Release:	1
 License:	BSD-style
 Group:		System/Servers
-URL:		http://www.wolfermann.org/dnsproxy.html
+URL:		https://www.wolfermann.org/dnsproxy.html
 Source0:	http://www.wolfermann.org/%{name}-%{version}.tar.gz
 Source1:	dnsproxy.service
 Requires(post): rpm-helper
